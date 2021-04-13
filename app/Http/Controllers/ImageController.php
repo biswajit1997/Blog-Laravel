@@ -3,13 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Posts;
-use App\Models\Tag;
-use App\Models\Comments;
-use \App\Mail\SendMail;
+use App\Models\ImageUpload;
+use Illuminate\Support\Facades\Storage;
 
-
-class PostsController extends Controller
+class ImageController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,7 +15,9 @@ class PostsController extends Controller
      */
     public function index()
     {
-        //
+        $alldata = ImageUpload::get();
+
+        return view('image', compact('alldata'));
     }
 
     /**
@@ -28,17 +27,15 @@ class PostsController extends Controller
      */
     public function create(Request $request)
     {
+        //  dd($request->hasFile('image'));
         $url =$request->image->store('images','public');
-        $tagnames =implode(" ",$request->tagname);
-        $user_id = auth()->user()->id;
-       Posts::create([
-           'title' => $request->title,
-           'user_id' => $user_id,
-           'description' => $request->description,
-           'image' => $url,
-           'tags_id' => $tagnames,
-       ]);
-       return redirect()->back();
+        
+        ImageUpload::Create([
+            'name' => $request->name,
+            'image'=> $url
+
+        ]);
+        return redirect()->back();
     }
 
     /**
@@ -94,27 +91,7 @@ class PostsController extends Controller
      */
     public function destroy($id)
     {
-        //
+       ImageUpload::destroy('id',$id);
+       return redirect()->back();
     }
-    public function post($id)
-    {   
-        
-        $comments = Comments::where('post_id',$id)->paginate(5);
-        $allposts= Posts::where('id',$id)->first();
-        $tag_ids = explode(" ",$allposts->tags_id);
-        $tags = Tag::select('id','tagname')->get();
-        foreach ($tags as $value) {
-            $tag_details[$value->id] = $value->tagname;
-        }
-        $data = [
-            'post' => $allposts,
-            'comments' => $comments,
-            'tag_ids' => $tag_ids,
-            'tags'  => $tag_details,
-        ];
-        
-        return view('postdetails', $data);
-    }
-   
-    
 }

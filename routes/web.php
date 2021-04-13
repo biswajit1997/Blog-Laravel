@@ -25,7 +25,7 @@ Route::get('/postdetails', function () {
 
 Auth::routes();
 
-
+Route::get('/tag/{id}', 'HomeController@tag'); 
 Route::get('/home', 'HomeController@posts');
 Route::post('/tags', 'TagController@create')->name('create');
 Route::post('/posts', 'PostsController@create')->name('posts');
@@ -33,7 +33,23 @@ Route::get('/postdetails/{id}','PostsController@post')->name('post');
 Route::post('/notification', 'HomeController@notification')->name('notification');
 Route::get('/notify', 'HomeController@notify');
 
+
 Route::get('export', 'MyController@export')->name('export');
 Route::get('importExportView', 'MyController@importExportView');
 Route::post('import', 'MyController@import')->name('import');
+
+Route::get('/api', 'ApiController@get_api');  
+Route::get('/edit_data/{id}', 'ApiController@edit_api_data');
+Route::post('/update', 'ApiController@update_api_data');
+Route::get('/delete_data/{id}', 'ApiController@delete_api_data');
+
+Route::get('/image_upload','ImageController@index');
+Route::post('/image_upload','ImageController@create');
+Route::get('/delete_image/{id}','ImageController@destroy');
+
+
+
+
+// Route::get('/api_data', 'HomeController@get_api')->name('api_data');
+
 

@@ -40,6 +40,13 @@
                     <b>Posted At</b> :{{$post->created_at}}
                 </div>
                 <div class="col-12 mb-2">
+                    
+                    <div class="text-center">
+                    <img src="{{ asset('storage/'.$post->image)}}" alt="image" width="500px" height="300px">
+                    </div>
+                   
+                </div>
+                <div class="col-12 mb-2">
                     <div class="bg-light pt-2 pb-2">
                     <b>Description</b> :
                     </div>

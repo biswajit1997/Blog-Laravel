@@ -42,7 +42,7 @@
         </button>
       </div>
       <div class="modal-body">
-              <form action="{{url('/posts')}}" method="POST">
+              <form action="{{url('/posts')}}" method="POST" enctype="multipart/form-data">
               @csrf
                    <div class="mb-3">
                     <label for="">Title :</label>
@@ -53,6 +53,10 @@
                     <textarea name="description" id="" rows="6" class="form-control">
 
                     </textarea>
+                   </div>
+                   <div class="mb-3">
+                    <label for="image">Image :</label>
+                    <input type="file" class="form-control" name="image" required>
                    </div>
                    <div class="mb-3">
                     <label for="">Post Tags :</label>

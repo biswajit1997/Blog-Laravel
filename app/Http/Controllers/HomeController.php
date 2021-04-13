@@ -9,6 +9,8 @@ use App\Notifications\Comment;
 use App\User;
 use Notification;
 use App\Models\Comments;
+use Illuminate\Support\Facades\Http;
+use \GuzzleHttp\Client;
 
 
 class HomeController extends Controller
@@ -37,7 +39,8 @@ class HomeController extends Controller
     public function posts()
     {
        
-        $allposts= Posts::paginate('4');
+        $allposts= Posts::latest()->paginate('4');
+        
         return view('home', ['posts' => $allposts]);
         
     }
@@ -69,7 +72,6 @@ class HomeController extends Controller
         // $user->notify(new Comment($details));
 
         return redirect()->route('post', ['id' => $request->id]);
- 
         
     }
     public function notify(){
@@ -81,4 +83,13 @@ class HomeController extends Controller
         }
         return $notifications;
     }
-}
+
+    public function tag($id){
+
+        $post=Posts::where('tags_id',$id)->paginate('2');
+        
+        return view('home', ['posts' => $post]);
+
+    }
+
+   }

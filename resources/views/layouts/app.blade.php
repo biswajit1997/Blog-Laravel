@@ -16,9 +16,9 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <style>
-    .btn-sm{
+    /* .btn-sm{
         background-color: #dfe7ef ! important;
-    }
+    } */
     .bel{
         position: absolute;
     top: 5px;
@@ -97,12 +97,18 @@
                                     <a class="dropdown-item" href="/importExportView">
                                         {{ __('Import File') }}
                                     </a>
+                                    <a class="dropdown-item" href="{{url('/api')}}">
+                                        {{ __('Api Data') }}
+                                    </a>
+                                    <a class="dropdown-item" href="{{url('/image_upload')}}">
+                                        {{ __('Image Upload') }}
+                                    </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
-                                    </a>
+                                    
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
