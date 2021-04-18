@@ -49,11 +49,12 @@ We would like to extend our thanks to the following sponsors for funding Laravel
 Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
 
 ## Please run this command
+```
 Composer install
-# php artisan storage:link
-# php artisan migrate
-# php artisan serve
-
+php artisan storage:link
+php artisan migrate
+php artisan serve
+```
 ## php version 7.4
 
 
